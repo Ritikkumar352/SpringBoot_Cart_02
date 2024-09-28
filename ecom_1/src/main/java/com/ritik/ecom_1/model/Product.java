@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
+
 @AllArgsConstructor
 
 public class Product {
@@ -24,10 +25,5 @@ public class Product {
     private boolean available;
     private int quantity;
 
-//    public Product(int id, String name, String sentence, String named, int price, String department, String string, boolean bool, int i) {
-//        this.id=id;
-//        this.name=name;
-//        this.price=price;
-//    }
 
 }

@@ -23,7 +23,7 @@ public class productController {
 
     @RequestMapping("/")
     public String home(){
-        return "welcomr to my Ecom";
+        return "welcome to my Ecom";
     }
 
     @GetMapping ("/products")
