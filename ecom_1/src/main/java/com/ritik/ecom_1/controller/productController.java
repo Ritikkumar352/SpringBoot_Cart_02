@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -18,24 +20,53 @@ public class productController {
 
 
     @RequestMapping("/")
-    public String home(){
+    public String home() {
         return "welcome to my Ecom";
     }
 
-    @GetMapping ("/product")
-    public ResponseEntity<List<Product>> getAllProducts(){
+
+    //Redirect
+    @GetMapping("/product")
+    public RedirectView redirectToProducts() {
+        return new RedirectView("/api/products");
+    }
+
+
+    @GetMapping("/products")
+    public ResponseEntity<List<Product>> getAllProducts() {
 
         return new ResponseEntity<>(service.getAllProducts(), HttpStatus.OK);
     }
 
-//    @CrossOrigin(origins = "http://localhost:5173")
+
+    //Redirect
     @GetMapping("/product/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable int id){
-        Product product=service.getProductById(id);
-        if(product!=null) {
-            return new ResponseEntity<>(product,HttpStatus.OK);
-        }else{
+    public RedirectView redirectProductById(@PathVariable int id) {
+        return new RedirectView("/api/products/" + id);
+    }
+
+
+    //    @CrossOrigin(origins = "http://localhost:5173")
+    @GetMapping("/products/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable int id) {
+        Product product = service.getProductById(id);
+        if (product != null) {
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/product")
+    public ResponseEntity<?> addProduct(@RequestPart Product product,
+                                        @RequestPart MultipartFile imageFile) {
+
+        try {
+            System.out.println(product);
+            Product product1 = service.addProduct(product, imageFile);
+            return new ResponseEntity<>(product1, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
