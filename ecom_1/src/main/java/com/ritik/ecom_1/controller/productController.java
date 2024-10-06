@@ -18,12 +18,10 @@ public class productController {
     @Autowired
     private ProductService service;
 
-
     @RequestMapping("/")
     public String home() {
         return "welcome to my Ecom";
     }
-
 
     //Redirect
     @GetMapping("/product")
@@ -31,13 +29,11 @@ public class productController {
         return new RedirectView("/api/products");
     }
 
-
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getAllProducts() {
 
         return new ResponseEntity<>(service.getAllProducts(), HttpStatus.OK);
     }
-
 
     //Redirect
     @GetMapping("/product/{id}")
