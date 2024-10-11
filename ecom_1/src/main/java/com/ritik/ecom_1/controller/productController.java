@@ -80,10 +80,9 @@ public class productController {
     }
 
 
+
+
+
 }
 
 
-//
-//public Product getProduct(@PathVariable int id){
-//    return service.getProductById(id);
-//}

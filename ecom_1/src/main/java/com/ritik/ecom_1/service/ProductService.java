@@ -37,5 +37,10 @@ public class ProductService {
         product.setImageDate(imageFile.getBytes());
         return repo.save(product);
     }
+
+
+
+
+
 }
 
