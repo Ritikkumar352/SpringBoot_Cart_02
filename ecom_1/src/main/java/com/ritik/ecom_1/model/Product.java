@@ -2,6 +2,7 @@ package com.ritik.ecom_1.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 public class Product {
     @Id
+    @GeneratedValue
     private int id;
     private String name;
     private String desc;
